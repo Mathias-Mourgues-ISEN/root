@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "kubecast-detector.fullname" . }}-rolebinding
+subjects:
+- kind: ServiceAccount
+  name: {{ include "kubecast-detector.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "kubecast-detector.fullname" . }}-role
+  apiGroup: rbac.authorization.k8s.io
